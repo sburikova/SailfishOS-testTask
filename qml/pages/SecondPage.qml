@@ -16,45 +16,38 @@ Page {
             source: imgPath
             fillMode: Image.PreserveAspectFit
 
-            MouseArea {
-                anchors.fill: parent
-                state: "small"
-                states:[
-                    State{
-                        name: "small"
-                        PropertyChanges {
-                            target: img
-                            scale: 1.0
-                        }
-                    },
-                    State{
-                        name: "big"
-                        PropertyChanges{
-                            target: img
-                            scale: 1.7
-                            z:1
-                        }
+            transform: Scale {
+                        id: tform
+                        origin.x: img.width/2
+                        origin.y: img.height/2
+
                     }
-                ]
-                onPressAndHold : {
-                    state = "big"
-                }
-                onReleased: {
-                    state = "small"
-                }
-            }
-            PinchArea {
-                pinch.target: img
-                pinch.maximumScale: 1.7
-            }
+
+            MouseArea {
+                       anchors.fill: parent
+                       property real pressedX: img.x
+                       property real pressedY: img.y
+
+                       onPressed:  {
+                           pressedX = mouse.x
+                           pressedY = mouse.y
+                       }
+
+                       onPositionChanged:  {
+                           if (mouse.y < pressedY){
+                               tform.xScale += 0.03
+                               tform.yScale += 0.03
+                           }
+                            if (mouse.y > pressedY){
+                               tform.xScale -= 0.03
+                               tform.yScale -= 0.03
+                           }
+
+                       }
+
+                   }
 
         }
 
-        Button {
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: "Return to selection"
-            onClicked: pageStack.pop()
-        }
     }
 }
-
