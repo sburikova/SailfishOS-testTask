@@ -42,12 +42,9 @@ Page {
                                tform.xScale -= 0.03
                                tform.yScale -= 0.03
                            }
-
                        }
-
-                   }
-
-        }
-
+                       
+            }
+        }       
     }
 }
