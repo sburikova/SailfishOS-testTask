@@ -24,26 +24,23 @@ Page {
                     }
 
             MouseArea {
-                       anchors.fill: parent
-                       property real pressedX: img.x
-                       property real pressedY: img.y
-
-                       onPressed:  {
-                           pressedX = mouse.x
-                           pressedY = mouse.y
-                       }
-
-                       onPositionChanged:  {
-                           if (mouse.y < pressedY){
-                               tform.xScale += 0.03
-                               tform.yScale += 0.03
-                           }
-                            if (mouse.y > pressedY){
-                               tform.xScale -= 0.03
-                               tform.yScale -= 0.03
-                           }
-                       }
-                       
+                anchors.fill: parent
+                property real pressedX: img.x
+                property real pressedY: img.y
+                onPressed:  {
+                    pressedX = mouse.x
+                    pressedY = mouse.y
+                }                       
+                onPositionChanged:  {
+                    if (mouse.y < pressedY){
+                        tform.xScale += 0.03
+                        tform.yScale += 0.03
+                    }
+                    if (mouse.y > pressedY){
+                        tform.xScale -= 0.03
+                        tform.yScale -= 0.03
+                    }
+                }
             }
         }       
     }
